@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustACombat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <div class="lefter">
+            <img src="./assets/logo.png" alt="" srcset="" class="logo" draggable="false" width="400" height="200">
+        </div>
+        <div class="main">
+            <div class="left">
+                <h3>Джастов:    <span class="gem-cost">0</span></h3>
+                <img src="./assets/clicker.png" alt="" srcset="" width="300" height="300" onclick="incrementGem()" class="gem-image" draggable="false">
+            </div>
+            <div class="right">
+                <div class="upgrade" onclick="buyClick()">
+                    <div class="left-section">
+                        <img src="./assets/upgrade_one.png" alt="" class="upgrade-img" draggable="false">
+                    </div>
+                    <div class="mid-section">
+                        <h4>Обычное видео</h4>
+                        <div class="cost-info">
+                            <p>Цена: <span class="clicker-cost">50</span></p>
+                            <img src="./assets/clicker.png" alt="" srcset="" class="gem-img" draggable="false">
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        Уровень <span class="clicker-level">0</span>
+                    </div>
+                    <div class="next-level-info">
+                        <p>
+                            +<span class="clicker-increase">1</span> Джаст <br /> за клик
+                        </p>
+                    </div>
+                </div>
+
+                <div class="upgrade" onclick="buyClicker2()">
+                    <div class="left-section">
+                        <img src="./assets/upgrade_two.png" alt="" class="upgrade-img" draggable="false">
+                    </div>
+                    <div class="mid-section">
+                        <h4>Разоблачение</h4>
+                        <div class="cost-info">
+                            <p>Цена: <span class="clicker2-cost">500</span></p>
+                            <img src="./assets/clicker.png" alt="" srcset="" class="gem-img" draggable="false">
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        Уровень <span class="clicker2-level">0</span>
+                    </div>
+                    <div class="next-level-info">
+                        <p>
+                            +<span class="clicker2-increase">600</span> Джастов <br /> в час
+                        </p>
+                    </div>
+                </div>
+
+                <div class="upgrade" onclick="buyFemboy()">
+                    <div class="left-section">
+                        <img src="./assets/femboy.png" alt="" class="upgrade-img" draggable="false">
+                    </div>
+                    <div class="mid-section">
+                        <h4>Фембойчик-видео</h4>
+                        <div class="cost-info">
+                            <p>Цена: <span class="femboy-cost">4500</span></p>
+                            <img src="./assets/clicker.png" alt="" srcset="" class="gem-img" draggable="false">
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        Уровень <span class="femboy-level">0</span>
+                    </div>
+                    <div class="next-level-info">
+                        <p>
+                            +<span class="femboy-increase">4500</span> Джастов <br /> в час
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="statistics">
+            <div class="texts">
+                <p>Джастов за клик: <span id="gpc-text">1</span></p>
+                <p>Джастов в час: <span id="gps-text">0</span></p>
+            </div>
+        </div>
+    </section>
+
+    <script src="index.js"></script>
+</body>
+</html>
