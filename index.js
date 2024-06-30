@@ -24,57 +24,106 @@ let parsedFemboyIncrease = parseFloat(femboyIncrease.innerHTML)
 let gpcText = document.getElementById("gpc-text")
 let gpsText = document.getElementById("gps-text")
 
+const upgrades = [
+    {
+        name: 'clicker',
+        cost: document.querySelector(".clicker-cost"),
+        parsedCost: parseFloat(document.querySelector('.clicker-cost').innerHTML),
+        increase: document.querySelector(".clicker-increase"),
+        parsedIncrease: parseFloat(document.querySelector(".clicker-increase").innerHTML),
+        level: document.querySelector(".clicker-level"),
+        gemMultiplier: 1.03,
+        costMultplier: 1.6,
+    },
+    {
+        name: 'clicker2',
+        cost: document.querySelector(".clicker2-cost"),
+        parsedCost: parseFloat(document.querySelector('.clicker2-cost').innerHTML),
+        increase: document.querySelector(".clicker2-increase"),
+        parsedIncrease: parseFloat(document.querySelector(".clicker2-increase").innerHTML),
+        level: document.querySelector(".clicker2-level"),
+        gemMultiplier: 2,
+        costMultplier: 1.8,
+    },
+    {
+        name: 'femboy',
+        cost: document.querySelector(".femboy-cost"),
+        parsedCost: parseFloat(document.querySelector('.femboy-cost').innerHTML),
+        increase: document.querySelector(".femboy-increase"),
+        parsedIncrease: parseFloat(document.querySelector(".femboy-increase").innerHTML),
+        level: document.querySelector(".femboy-level"),
+        gemMultiplier: 2,
+        costMultplier: 1.4,
+    },
+]
 
 function incrementGem() {
     gem.innerHTML = Math.round(parsedGem += gpc);
 }
 
-function buyClick() {
-    if (parsedGem >= parsedClickerCost) {
-        parsedGem -= parsedClickerCost;
-        gem.innerHTML = Math.round(parsedGem);
+function buyUpgrade(upgrade) {
+    const mu = upgrades.find((u) => {
+        if (u.name === upgrade) return u
+    })
 
-        clickerLevel.innerHTML ++
+    if (parsedGem >= mu.parsedCost) {
+        gem.innerHTML = Math.round(parsedGem -= mu.parsedCost);
 
-        parsedClickerIncrease = parseFloat((parsedClickerIncrease * 1.03).toFixed(2))
-        clickerIncrease.innerHTML = parsedClickerIncrease
-        gpc += parsedClickerIncrease
+        mu.level.innerHTML ++
 
-        parsedClickerCost *= 1.6;
-        clickerCost.innerHTML = Math.round(parsedClickerCost)
-    }
-}
+        mu.parsedIncrease = parseFloat((mu.parsedIncrease * mu.gemMultiplier).toFixed(2))
+        mu.increase.innerHTML = mu.parsedIncrease
+        
+        mu.parsedCost *= mu.costMultplier;
+        mu.cost.innerHTML = Math.round(mu.parsedCost)
 
-function buyClicker2() {
-        if (parsedGem >= parsedClicker2Cost) {
-            parsedGem -= parsedClicker2Cost;
-            gem.innerHTML = Math.round(parsedGem);
-    
-            clicker2Level.innerHTML ++
-    
-            parsedClicker2Increase = parseFloat((parsedClicker2Increase * 2).toFixed(2))
-            clicker2Increase.innerHTML = parsedClicker2Increase
-            gps += parsedClicker2Increase
-    
-            parsedClicker2Cost *= 1.6;
-            clicker2Cost.innerHTML = Math.round(parsedClicker2Cost)
+        if (mu.name === 'clicker') {
+            gpc += mu.parsedIncrease
+        } else {
+            gps += mu.parsedIncrease
         }
+    }
 }
 
-function buyFemboy() {
-    if (parsedGem >= parsedFemboyCost) {
-        parsedGem -= parsedFemboyCost;
-        gem.innerHTML = Math.round(parsedGem);
+function save() {
+    localStorage.clear()
 
-        femboyLevel.innerHTML ++
+    upgrades.map((upgrade) => {
 
-        parsedFemboyIncrease = parseFloat((parsedFemboyIncrease * 2).toFixed(2))
-        femboyIncrease.innerHTML = parsedFemboyIncrease
-        gps += parsedFemboyIncrease
+        const obj = JSON.stringify({
+            parsedLevel: parseFloat(upgrade.level.innerHTML),
+            parsedCost: upgrade.parsedCost,
+            parsedIncrease: upgrade.parsedIncrease
+        })
 
-        parsedFemboyCost *= 1.4;
-        femboyCost.innerHTML = Math.round(parsedFemboyCost)
-    }
+        localStorage.setItem(upgrade.name, obj)
+
+    })             
+    
+    localStorage.setItem('gpc', JSON.stringify(gpc))
+    localStorage.setItem('gps', JSON.stringify(gps))
+    localStorage.setItem('gem', JSON.stringify(parsedGem))
+
+    console.log(localStorage)
+}
+
+function load() {
+    upgrades.map((upgrade) => {
+        const savedValues = JSON.parse(localStorage.getItem(upgrade.name))
+
+        upgrade.parsedCost = savedValues.parsedCost
+        upgrade.parsedIncrease = savedValues.parsedIncrease
+        
+        upgrade.level.innerHTML = savedValues.parsedLevel
+        upgrade.cost.innerHTML = Math.round(upgrade.parsedCost)
+        upgrade.increase.innerHTML = upgrade.parsedIncrease
+    })
+
+    gpc = JSON.parse(localStorage.getItem('gpc'))
+    gps = JSON.parse(localStorage.getItem('gps'))
+    parsedGem = JSON.parse(localStorage.getItem('gem'))
+
+    gem.innerHTML = Math.round(parsedGem)
 }
 
 setInterval(() => {
@@ -82,7 +131,4 @@ setInterval(() => {
     gem.innerHTML = Math.round(parsedGem)
     gpcText.innerHTML = Math.round(gpc)
     gpsText.innerHTML = Math.round(gps)
-    console.log(localStorage.getItem('gpc'))
-    localStorage.setItem('gpc', Math.round(gpc))
-    console.log(localStorage.getItem('gpc'))
 }, 1000)
