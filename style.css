@@ -137,3 +137,8 @@ body {
     font-weight: bold;
     font-size: 22px;
 }
+
+.event {
+    background-color: gray;
+    opacity: 0.6;
+}

@@ -2,6 +2,7 @@ let gem = document.querySelector('.gem-cost');
 let parsedGem = parseFloat(gem.innerHTML);
 let gpc = 1;
 let gps = 0;
+let time = 600;
 
 let clickerCost = document.querySelector('.clicker-cost');
 let parsedClickerCost = parseFloat(clickerCost.innerHTML);
@@ -20,6 +21,7 @@ let parsedFemboyCost = parseFloat(femboyCost.innerHTML);
 let femboyLevel = document.querySelector(".femboy-level")
 let femboyIncrease = document.querySelector(".femboy-increase")
 let parsedFemboyIncrease = parseFloat(femboyIncrease.innerHTML)
+let event = document.querySelector(".event")
 
 let gpcText = document.getElementById("gpc-text")
 let gpsText = document.getElementById("gps-text")
@@ -42,7 +44,7 @@ const upgrades = [
         increase: document.querySelector(".clicker2-increase"),
         parsedIncrease: parseFloat(document.querySelector(".clicker2-increase").innerHTML),
         level: document.querySelector(".clicker2-level"),
-        gemMultiplier: 2,
+        gemMultiplier: 1.4,
         costMultplier: 1.8,
     },
     {
@@ -52,8 +54,8 @@ const upgrades = [
         increase: document.querySelector(".femboy-increase"),
         parsedIncrease: parseFloat(document.querySelector(".femboy-increase").innerHTML),
         level: document.querySelector(".femboy-level"),
-        gemMultiplier: 2,
-        costMultplier: 1.4,
+        gemMultiplier: 1.5,
+        costMultplier: 1.7,
     },
 ]
 
@@ -127,8 +129,33 @@ function load() {
 }
 
 setInterval(() => {
-    parsedGem += gps / 600
+    parsedGem += gps / time
     gem.innerHTML = Math.round(parsedGem)
     gpcText.innerHTML = Math.round(gpc)
     gpsText.innerHTML = Math.round(gps)
 }, 1000)
+
+function goodRandom() {
+    var min = 5,
+      max = 10;
+    var rand = Math.floor(Math.random() * (max - min + 1) + min); //Generate Random number between 5 - 10
+    console.log('Подождите ' + rand + ' минут');
+    setTimeout(goodEvent, rand * 60000);
+    setTimeout(stopGoodEvent, rand * 60000 + 60000)
+}
+
+function goodEvent() {
+    event.innerHTML = 'Ваше видео попало в тренды, x7 кликов на 1 минуту!'
+    gpc = gpc*7
+    console.log ('монеты увеличены!')
+    setTimeout(goodRandom, 2 * 60000)
+}
+
+function stopGoodEvent() {
+    gpc = gpc/7
+    event.innerHTML = ''
+}
+
+
+goodRandom()
+
