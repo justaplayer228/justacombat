@@ -21,6 +21,30 @@ let parsedFemboyCost = parseFloat(femboyCost.innerHTML);
 let femboyLevel = document.querySelector(".femboy-level")
 let femboyIncrease = document.querySelector(".femboy-increase")
 let parsedFemboyIncrease = parseFloat(femboyIncrease.innerHTML)
+
+let streamCost = document.querySelector('.stream-cost');
+let parsedStreamCost = parseFloat(streamCost.innerHTML);
+let streamLevel = document.querySelector(".stream-level")
+let streamIncrease = document.querySelector(".stream-increase")
+let parsedStreamIncrease = parseFloat(streamIncrease.innerHTML)
+
+let coopCost = document.querySelector('.coop-cost');
+let parsedCoopCost = parseFloat(coopCost.innerHTML);
+let coopLevel = document.querySelector(".coop-level")
+let coopIncrease = document.querySelector(".coop-increase")
+let parsedCoopIncrease = parseFloat(coopIncrease.innerHTML)
+
+let charityCost = document.querySelector('.charity-cost');
+let parsedCharityCost = parseFloat(charityCost.innerHTML);
+let charityLevel = document.querySelector(".charity-level")
+let charityIncrease = document.querySelector(".charity-increase")
+let parsedCharityIncrease = parseFloat(charityIncrease.innerHTML)
+
+let comingCost = document.querySelector('.coming-cost');
+let parsedComingCost = parseFloat(comingCost.innerHTML);
+let comingLevel = document.querySelector(".coming-level")
+let comingIncrease = document.querySelector(".coming-increase")
+let parsedComingIncrease = parseFloat(comingIncrease.innerHTML)
 let event = document.querySelector(".event")
 
 let gpcText = document.getElementById("gpc-text")
@@ -44,7 +68,7 @@ const upgrades = [
         increase: document.querySelector(".clicker2-increase"),
         parsedIncrease: parseFloat(document.querySelector(".clicker2-increase").innerHTML),
         level: document.querySelector(".clicker2-level"),
-        gemMultiplier: 1.4,
+        gemMultiplier: 1.14,
         costMultplier: 1.8,
     },
     {
@@ -54,6 +78,46 @@ const upgrades = [
         increase: document.querySelector(".femboy-increase"),
         parsedIncrease: parseFloat(document.querySelector(".femboy-increase").innerHTML),
         level: document.querySelector(".femboy-level"),
+        gemMultiplier: 1.3,
+        costMultplier: 1.7,
+    },
+    {
+        name: 'stream',
+        cost: document.querySelector(".stream-cost"),
+        parsedCost: parseFloat(document.querySelector('.stream-cost').innerHTML),
+        increase: document.querySelector(".stream-increase"),
+        parsedIncrease: parseFloat(document.querySelector(".stream-increase").innerHTML),
+        level: document.querySelector(".stream-level"),
+        gemMultiplier: 1.05,
+        costMultplier: 1.6,
+    },
+    {
+        name: 'coop',
+        cost: document.querySelector(".coop-cost"),
+        parsedCost: parseFloat(document.querySelector('.coop-cost').innerHTML),
+        increase: document.querySelector(".coop-increase"),
+        parsedIncrease: parseFloat(document.querySelector(".coop-increase").innerHTML),
+        level: document.querySelector(".coop-level"),
+        gemMultiplier: 1.05,
+        costMultplier: 1.6,
+    },
+    {
+        name: 'charity',
+        cost: document.querySelector(".charity-cost"),
+        parsedCost: parseFloat(document.querySelector('.charity-cost').innerHTML),
+        increase: document.querySelector(".charity-increase"),
+        parsedIncrease: parseFloat(document.querySelector(".charity-increase").innerHTML),
+        level: document.querySelector(".charity-level"),
+        gemMultiplier: 1.4,
+        costMultplier: 1.6,
+    },
+    {
+        name: 'coming',
+        cost: document.querySelector(".coming-cost"),
+        parsedCost: parseFloat(document.querySelector('.coming-cost').innerHTML),
+        increase: document.querySelector(".coming-increase"),
+        parsedIncrease: parseFloat(document.querySelector(".coming-increase").innerHTML),
+        level: document.querySelector(".coming-level"),
         gemMultiplier: 1.5,
         costMultplier: 1.7,
     },
@@ -79,7 +143,7 @@ function buyUpgrade(upgrade) {
         mu.parsedCost *= mu.costMultplier;
         mu.cost.innerHTML = Math.round(mu.parsedCost)
 
-        if (mu.name === 'clicker') {
+        if (mu.name === 'clicker' || mu.name === 'stream' || mu.name === 'coop') {
             gpc += mu.parsedIncrease
         } else {
             gps += mu.parsedIncrease
