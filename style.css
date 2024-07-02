@@ -9,6 +9,7 @@ body {
     user-select: none;
     font-family: 'Arial', Helvetica, sans-serif;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .main {
@@ -90,7 +91,7 @@ body {
 .next-level-info {
     position: absolute;
     right: -100px;
-    background-color: slategrey;
+    background-color: #2E8B57;
     display: none;
 }
 
